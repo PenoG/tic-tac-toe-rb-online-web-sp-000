@@ -43,10 +43,11 @@ def turn(board)
 end
 
 def play(board)
-  turn_count = 0
-  while turn_count < 9
-    turn(board)
-    turn_count+=1
+  turn(board) until over?(board)
+  if won?(board)
+    puts "Congratulations #{winner(board)}!"
+  elsif draw?(board)
+    puts "Cat's Game!"
   end
 end
 
@@ -82,7 +83,7 @@ WIN_COMBINATIONS = [
   [2,5,8],
   [0,4,8],
   [6,4,2]
-]
+].freeze
 
 def won?(board)
   WIN_COMBINATIONS.detect do |combo|
